@@ -8,7 +8,7 @@
       "ena_support": true,
       "ssh_username": "ec2-user",
       "ami_name": "ACME Development Deep Learning AMI {{isotime \"2006-01-02_15_04_05\"}}",
-      "ami_users":  "{{user `share_with_accounts` }}",
+      "ami_users": "{{user `share_with_accounts` }}",
       "run_tags": {
       }
     }
@@ -18,7 +18,12 @@
       "type": "shell",
       "inline": [
         "sudo yum -y -q update",
-        "/home/ec2-user/anaconda3/bin/conda install -y -q pytorch torchvision cudatoolkit=9.0 -c pytorch"
+        "/home/ec2-user/anaconda3/bin/conda install -y -q pytorch torchvision cudatoolkit=9.0 -c pytorch",
+        "mkdir -p /home/ec2-user/datasets",
+        "cd /home/ec2-user/datasets && curl https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip -o dogImages.zip",
+        "cd /home/ec2-user/datasets && unzip dogImages.zip",
+        "cd /home/ec2-user/datasets && curl http://vis-www.cs.umass.edu/lfw/lfw.tgz -o lfw.tgz",
+        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz"
       ]
     }
   ]
