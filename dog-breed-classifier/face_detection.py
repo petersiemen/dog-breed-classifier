@@ -53,6 +53,10 @@ human_files_short = human_files[:100]
 dog_files_short = dog_files[:100]
 
 detected_humans = [face_detector(human_file) for human_file in tqdm(human_files_short)]
+precision_human_face_detector = detected_humans.count(True) / float(len(detected_humans)) * 100
 detected_dogs = [face_detector(dog_file) for dog_file in tqdm(dog_files_short)]
+precision_dog_face_detector = detected_dogs.count(True) / float(len(detected_dogs)) * 100
 
-print(detected_dogs)
+
+print("\nprecision_human_face_detector: {}%".format(precision_human_face_detector))
+print("\nprecision_dog_face_detector: {}%".format(precision_dog_face_detector))
