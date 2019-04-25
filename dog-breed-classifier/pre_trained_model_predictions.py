@@ -54,7 +54,7 @@ def VGG16_predict(img_path):
     # print(vgg16)
     out = vgg16(tensor.reshape(1, 3, 255, 255))
     idx_of_max_value = out.detach().numpy().argmax()
-    
+
     return idx_of_max_value  # predicted class index
 
 
