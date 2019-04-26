@@ -13,7 +13,7 @@ from PIL import Image
 import matplotlib.pyplot as plt
 
 # Load the pretrained model from pytorch
-vgg16 = models.vgg16(pretrained=True)
+VGG16 = models.vgg16(pretrained=True)
 
 
 def VGG16_predict(img_path):
@@ -51,8 +51,8 @@ def VGG16_predict(img_path):
 
     # plt.imshow(tensor.numpy().transpose((1, 2, 0)))
     # plt.show()
-    # print(vgg16)
-    out = vgg16(tensor.reshape(1, 3, 255, 255))
+    print(VGG16)
+    out = VGG16(tensor.reshape(1, 3, 255, 255))
     idx_of_max_value = out.detach().numpy().argmax()
 
     return idx_of_max_value  # predicted class index
@@ -60,3 +60,39 @@ def VGG16_predict(img_path):
 
 prediction = VGG16_predict('dogImages/train/001.Affenpinscher/Affenpinscher_00001.jpg')
 print(prediction)
+
+import numpy as np
+from glob import glob
+
+import cv2
+import matplotlib.pyplot as plt
+
+from tqdm import tqdm
+
+# load filenames for human and dog images
+human_files = np.array(glob("lfw/*/*"))
+dog_files = np.array(glob("dogImages/*/*/*"))
+
+human_files_short = human_files[:100]
+dog_files_short = dog_files[:100]
+
+
+### returns "True" if a dog is detected in the image stored at img_path
+def dog_detector(img_path):
+    ## TODO: Complete the function.
+    predicted_class_index = VGG16_predict(img_path)
+    is_dog = True if predicted_class_index >= 151 and predicted_class_index <= 268 else False
+    return is_dog  # true/false
+
+
+# detected_dogs_in_humans = [dog_detector(human_file) for human_file in tqdm(human_files_short)].count(True)
+# detected_dogs_in_dogs = [dog_detector(dog_file) for dog_file in tqdm(dog_files_short)].count(True)
+#
+#
+# print('\nTest Accuracy Dog Classifier (Finding Humans): %2d%% (%2d/%2d)' % (
+#     100. * detected_dogs_in_humans / len(human_files_short),
+#     detected_dogs_in_humans, len(human_files_short)))
+#
+# print('\nTest Accuracy Dog Classifier (Finding Dogs): %2d%% (%2d/%2d)' % (
+#     100. * detected_dogs_in_dogs / len(dog_files_short),
+#     detected_dogs_in_dogs, len(dog_files_short)))
