@@ -68,7 +68,6 @@ def predict_breed_transfer(img_path):
     # load the image and return the predicted breed
 
     image = Image.open(img_path)
-    plt.imshow(image)
 
     transform = transforms.Compose([
         transforms.Resize(255),
@@ -77,7 +76,14 @@ def predict_breed_transfer(img_path):
     ])
 
     tensor = transform(image)
+    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
+    plt.show()
 
+    out = model_transfer.forward(tensor.reshape(1, 3, 255, 255))
+    idx_of_max_value = out.detach().numpy().argmax()
+
+    print(out)
+    print(idx_of_max_value)
     return None
 
 
