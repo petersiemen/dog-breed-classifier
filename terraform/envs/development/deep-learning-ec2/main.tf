@@ -15,6 +15,8 @@ resource "aws_instance" "web" {
   instance_type = "${var.deep_learning_aws_instance_type}"
   key_name      = "${data.terraform_remote_state.access.aws_key_pair__key_name__peter}"
 
+  iam_instance_profile = "${data.terraform_remote_state.access.iam_instance_profile_role_name__deep_learning}"
+
   security_groups = [
     "${data.terraform_remote_state.access.security_group__name__ssh_access_from_home}",
     "${data.terraform_remote_state.access.security_group__name__jupyter_access_from_home}",

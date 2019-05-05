@@ -18,17 +18,16 @@
       "type": "shell",
       "inline": [
         "sudo yum -y -q update",
-        "/home/ec2-user/anaconda3/bin/conda install -y -q pytorch torchvision cudatoolkit=9.0 -c pytorch",
+        "sudo yum -y -q upgrade",
+        "curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | sudo bash",
+        "sudo yum install -y -q git-lfs",
+        "rm -r /home/ec2-user/anaconda*",
+        "rm -r /home/ec2-user/examples",
         "mkdir -p /home/ec2-user/datasets",
         "cd /home/ec2-user/datasets && curl https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip -o dogImages.zip",
         "cd /home/ec2-user/datasets && unzip dogImages.zip",
         "cd /home/ec2-user/datasets && curl http://vis-www.cs.umass.edu/lfw/lfw.tgz -o lfw.tgz",
-        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz",
-        "rm -r /home/ec2-user/anaconda*",
-        "rm -r /home/ec2-user/examples",
-
-        "curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | sudo bash",
-        "yum install -y git-lfs"
+        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz"
       ]
     }
   ]

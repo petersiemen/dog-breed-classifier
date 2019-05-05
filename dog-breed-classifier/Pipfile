@@ -18,6 +18,7 @@ numpy = "*"
 pillow = "*"
 scipy = "*"
 tqdm = "*"
+face-recognition = "*"
 
 [requires]
 python_version = "3.6"

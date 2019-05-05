@@ -21,3 +21,11 @@ output "security_group__id__ssh_access_from_home" {
 output "security_group__id__internet_out" {
   value = "${aws_security_group.internet-out-all-ports.id}"
 }
+
+output "iam_instance_profile_role_arn__deep_learning" {
+  value = "${aws_iam_instance_profile.deep-learning-ec2-profile.arn}"
+}
+
+output "iam_instance_profile_role_name__deep_learning" {
+  value = "${aws_iam_instance_profile.deep-learning-ec2-profile.name}"
+}
