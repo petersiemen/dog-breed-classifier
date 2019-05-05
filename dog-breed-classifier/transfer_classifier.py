@@ -4,6 +4,10 @@
 from torchvision import datasets, transforms
 import torch
 import matplotlib.pyplot as plt
+import cv2
+
+# extract pre-trained face detector
+face_cascade = cv2.CascadeClassifier('haarcascades/haarcascade_frontalface_alt.xml')
 
 size = 128
 cropped_size = 128
@@ -18,7 +22,7 @@ test_transforms = transforms.Compose([transforms.Resize(size),
                                       transforms.ToTensor()])
 
 data_dir = "./dogImages"
-#data_dir = "./dogImagesSample"
+# data_dir = "./dogImagesSample"
 # Pass transforms in here, then run the next cell to see how the transforms look
 train_data = datasets.ImageFolder(data_dir + '/train', transform=train_transforms)
 test_data = datasets.ImageFolder(data_dir + '/test', transform=test_transforms)
@@ -36,7 +40,7 @@ data_iter = iter(trainloader)
 #     ax = axes[ii]
 #     ax.imshow(images[ii].numpy().transpose((1, 2, 0)))
 
-#plt.show()
+# plt.show()
 
 loaders_transfer = dict()
 loaders_transfer['train'] = trainloader
@@ -65,6 +69,21 @@ use_cuda = False
 from PIL import Image
 
 
+# returns "True" if face is detected in image stored at img_path
+def face_detector(img_path):
+    img = cv2.imread(img_path)
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    faces = face_cascade.detectMultiScale(gray)
+    return len(faces) > 0
+
+
+### returns "True" if a dog is detected in the image stored at img_path
+def dog_detector(img_path):
+    ## TODO: Complete the function.
+
+    return True
+
+
 def predict_breed_transfer(img_path):
     # load the image and return the predicted breed
 
@@ -83,24 +102,38 @@ def predict_breed_transfer(img_path):
         out = out.cpu()
     idx_of_max_value = out.detach().numpy().argmax()
 
-#    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
-#    plt.show()
-#    print(out)
-#    print(idx_of_max_value)
+    #    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
+    #    plt.show()
+    #    print(out)
+    #    print(idx_of_max_value)
     return class_names[idx_of_max_value]
 
 
 def run_app(img_path):
-    breed = predict_breed_transfer(img_path)
+    greeting = 'Hi you! Impossible to say whether you are human or dog'
+    tell_me_more = ''
+
+    is_dog = dog_detector(img_path)
+
+    if is_dog:
+        greeting = 'Hi dog!'
+        breed = predict_breed_transfer(img_path)
+        tell_me_more = 'You look like a ... {}'.format(breed)
+    else:
+        is_human = face_detector(img_path)
+        if is_human:
+            greeting = 'Hi human!'
+            breed = predict_breed_transfer(img_path)
+            tell_me_more = 'You look like a...\n {}'.format(breed)
+
     image = Image.open(img_path)
-    plt.text(-10, -100, "Hi there", fontsize=12)
+    plt.text(-10, -100, greeting, fontsize=12)
 
     plt.imshow(image)
-    plt.text(-10, image.height + 150, 'You look like an {}'.format(breed), fontsize=12)
+    plt.text(-10, image.height + 150, tell_me_more, fontsize=12)
     plt.show()
-    print(breed)
 
 
 run_app("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
-#breed = predict_breed_transfer("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
-#print(breed)
+# breed = predict_breed_transfer("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
+# print(breed)
