@@ -17,8 +17,8 @@ test_transforms = transforms.Compose([transforms.Resize(size),
                                       transforms.CenterCrop(size),
                                       transforms.ToTensor()])
 
-# data_dir = "./dogImages"
-data_dir = "./dogImagesSample"
+data_dir = "./dogImages"
+#data_dir = "./dogImagesSample"
 # Pass transforms in here, then run the next cell to see how the transforms look
 train_data = datasets.ImageFolder(data_dir + '/train', transform=train_transforms)
 test_data = datasets.ImageFolder(data_dir + '/test', transform=test_transforms)
@@ -76,15 +76,17 @@ def predict_breed_transfer(img_path):
     ])
 
     tensor = transform(image)
-    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
-    plt.show()
+#    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
+#    plt.show()
 
     out = model_transfer.forward(tensor.reshape(1, 3, 255, 255))
     idx_of_max_value = out.detach().numpy().argmax()
 
-    print(out)
-    print(idx_of_max_value)
-    return None
+#    print(out)
+#    print(idx_of_max_value)
+    return class_names[idx_of_max_value]
 
 
-predict_breed_transfer("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
+
+breed = predict_breed_transfer("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
+print(breed)

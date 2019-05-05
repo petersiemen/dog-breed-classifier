@@ -25,7 +25,10 @@
         "cd /home/ec2-user/datasets && curl http://vis-www.cs.umass.edu/lfw/lfw.tgz -o lfw.tgz",
         "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz",
         "rm -r /home/ec2-user/anaconda*",
-        "rm -r /home/ec2-user/examples"
+        "rm -r /home/ec2-user/examples",
+
+        "curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | sudo bash",
+        "yum install -y git-lfs"
       ]
     }
   ]
