@@ -43,16 +43,6 @@ Along with exploring state-of-the-art CNN models for classification and localiza
 
 If your code is taking too long to run, you will need to either reduce the complexity of your chosen CNN architecture or switch to running your code on a GPU.  If you'd like to use a GPU, you can spin up an instance of your own:
 
-1. Login to your ec2-instance (deep learning ami)
-2. Generate Jupyter Config
-```bash
-    cd deep-learning-/dog-breed-classifier
-    jupyter notebook --generate-config    
-    jupyter notebook --ip=0.0.0.0 --no-browser
-
-
-``` 
-
 #### Amazon Web Services
 
 You can use Amazon Web Services to launch an EC2 GPU instance. (This costs money, but enrolled students should see a coupon code in their student `resources`.)
