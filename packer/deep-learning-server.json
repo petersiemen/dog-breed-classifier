@@ -23,7 +23,9 @@
         "cd /home/ec2-user/datasets && curl https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip -o dogImages.zip",
         "cd /home/ec2-user/datasets && unzip dogImages.zip",
         "cd /home/ec2-user/datasets && curl http://vis-www.cs.umass.edu/lfw/lfw.tgz -o lfw.tgz",
-        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz"
+        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz",
+        "rm -r /home/ec2-user/anaconda*",
+        "rm -r /home/ec2-user/examples"
       ]
     }
   ]

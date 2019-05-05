@@ -2,6 +2,10 @@ resource "aws_security_group" "ssh-access-from-home" {
   name = "ssh-access-from-home"
 }
 
+resource "aws_security_group" "jupyter-access-from-home" {
+  name = "jupyter-access-from-home"
+}
+
 resource "aws_security_group" "internet-out-all-ports" {
   name = "all-access-out-to-internet"
 }
@@ -11,6 +15,18 @@ resource "aws_security_group_rule" "ssh-access-from-home" {
   protocol          = "TCP"
   security_group_id = "${aws_security_group.ssh-access-from-home.id}"
   to_port           = 22
+  type              = "ingress"
+
+  cidr_blocks = [
+    "${var.ip_address_home}/32",
+  ]
+}
+
+resource "aws_security_group_rule" "jupyter-access-from-home" {
+  from_port         = 8888
+  protocol          = "TCP"
+  security_group_id = "${aws_security_group.jupyter-access-from-home.id}"
+  to_port           = 8888
   type              = "ingress"
 
   cidr_blocks = [

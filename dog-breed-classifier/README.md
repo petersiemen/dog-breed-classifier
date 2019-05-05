@@ -30,10 +30,11 @@ Along with exploring state-of-the-art CNN models for classification and localiza
 6. Create a virtualenv using pipenv and install necessary dependencies
 ```bash
     cd deep-learning-aws/dog-breed-classifier
-    pipenv install
+    pip3 install --user pipenv
 ``` 
 6. Activate virtualenv and open the jupyter notebook	
 ```bash
+    pipenv install
     pipenv shell
     jupyter notebook dog_app.ipynb
 ```
@@ -41,6 +42,16 @@ Along with exploring state-of-the-art CNN models for classification and localiza
 ## (Optionally) Accelerating the Training Process 
 
 If your code is taking too long to run, you will need to either reduce the complexity of your chosen CNN architecture or switch to running your code on a GPU.  If you'd like to use a GPU, you can spin up an instance of your own:
+
+1. Login to your ec2-instance (deep learning ami)
+2. Generate Jupyter Config
+```bash
+    cd deep-learning-/dog-breed-classifier
+    jupyter notebook --generate-config    
+    jupyter notebook --ip=0.0.0.0 --no-browser
+
+
+``` 
 
 #### Amazon Web Services
 
