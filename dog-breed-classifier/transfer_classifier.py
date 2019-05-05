@@ -30,13 +30,13 @@ validloader = torch.utils.data.DataLoader(valid_data, batch_size=64)
 
 data_iter = iter(trainloader)
 
-images, labels = next(data_iter)
-fig, axes = plt.subplots(figsize=(10, 4), ncols=4)
-for ii in range(4):
-    ax = axes[ii]
-    ax.imshow(images[ii].numpy().transpose((1, 2, 0)))
+# images, labels = next(data_iter)
+# fig, axes = plt.subplots(figsize=(10, 4), ncols=4)
+# for ii in range(4):
+#     ax = axes[ii]
+#     ax.imshow(images[ii].numpy().transpose((1, 2, 0)))
 
-plt.show()
+#plt.show()
 
 loaders_transfer = dict()
 loaders_transfer['train'] = trainloader
@@ -60,6 +60,7 @@ print(model_transfer)
 
 class_names = [item[4:].replace("_", " ") for item in loaders_transfer['train'].dataset.classes]
 print(class_names)
+use_cuda = False
 
 from PIL import Image
 
@@ -76,17 +77,30 @@ def predict_breed_transfer(img_path):
     ])
 
     tensor = transform(image)
-#    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
-#    plt.show()
 
     out = model_transfer.forward(tensor.reshape(1, 3, 255, 255))
+    if use_cuda:
+        out = out.cpu()
     idx_of_max_value = out.detach().numpy().argmax()
 
+#    plt.imshow(tensor.numpy().transpose((1, 2, 0)))
+#    plt.show()
 #    print(out)
 #    print(idx_of_max_value)
     return class_names[idx_of_max_value]
 
 
+def run_app(img_path):
+    breed = predict_breed_transfer(img_path)
+    image = Image.open(img_path)
+    plt.text(-10, -100, "Hi there", fontsize=12)
 
-breed = predict_breed_transfer("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
-print(breed)
+    plt.imshow(image)
+    plt.text(-10, image.height + 150, 'You look like an {}'.format(breed), fontsize=12)
+    plt.show()
+    print(breed)
+
+
+run_app("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
+#breed = predict_breed_transfer("./dogImagesSample/valid/001.Affenpinscher/Affenpinscher_00038.jpg")
+#print(breed)
