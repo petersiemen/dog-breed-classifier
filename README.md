@@ -31,9 +31,10 @@ Get the public IP address of the ec2-instance
 ssh -L localhost:8888:localhost:8888  ec2-user@[PUBLIC_IP_ADDRESS_OF_EC2_INSTANCE]
 ```
 
-# start a jupyter notebook
+# start a jupyter notebook on server
 ```bash
-juypter notebook
+jupyter notebook --generate-config    
+jupyter notebook --ip=0.0.0.0 --no-browser
 ```
 
 

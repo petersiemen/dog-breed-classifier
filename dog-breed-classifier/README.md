@@ -30,10 +30,11 @@ Along with exploring state-of-the-art CNN models for classification and localiza
 6. Create a virtualenv using pipenv and install necessary dependencies
 ```bash
     cd deep-learning-aws/dog-breed-classifier
-    pipenv install
+    pip3 install --user pipenv
 ``` 
 6. Activate virtualenv and open the jupyter notebook	
 ```bash
+    pipenv install
     pipenv shell
     jupyter notebook dog_app.ipynb
 ```
