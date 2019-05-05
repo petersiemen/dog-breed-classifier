@@ -10,7 +10,7 @@ aws_account_id = 982023434191
 
 //deep_learning_aws_instance_type = "p2.xlarge"
 
-deep_learning_aws_ami = "ami-0ee4cb8819c449428" // ACME Development Deep Learning AMI 2019-05-05_16_54_10
+deep_learning_aws_ami = "ami-0f16a49887f5b8df3" // ACME Development Deep Learning AMI 2019-05-05_19_03_59
 
 deep_learning_aws_instance_type = "p2.xlarge"
 

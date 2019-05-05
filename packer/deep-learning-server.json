@@ -19,6 +19,15 @@
       "inline": [
         "sudo yum -y -q update",
         "sudo yum -y -q upgrade",
+        "ssh-keyscan github.com >> ~/.ssh/known_hosts",
+        "git clone git@github.com:petersiemen/deep-learning-aws.git",
+        "pip3 install --user pipenv",
+        "pip install --upgrade pip",
+
+        "sudo yum install -y -q cmake3",
+        "ln -s /usr/bin/cmake3 /usr/local/bin/cmake",
+        "cd /home/ec2-user/deep-learning-aws/dog-breed-classifier && /home/ec2-user/.local/bin/pipenv install",
+
         "curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.rpm.sh | sudo bash",
         "sudo yum install -y -q git-lfs",
         "rm -r /home/ec2-user/anaconda*",
