@@ -64,3 +64,14 @@ print('\nTest Accuracy (Dog): %2d%% (%2d/%2d)' % (
     100. * detected_dogs / len(dog_files_short),
     detected_dogs, len(dog_files_short)))
 
+
+import face_recognition
+def dlib_face_detector(img_path):
+    image = face_recognition.load_image_file(img_path)
+    face_locations = face_recognition.face_locations(image, model="cnn")
+    return len(face_locations) > 0
+
+dlib_detected_humans = [dlib_face_detector(human_file) for human_file in tqdm(human_files_short)].count(True)
+print('\nTest Accuracy (Human): %2d%% (%2d/%2d)' % (
+    100. * dlib_detected_humans / len(human_files_short),
+    dlib_detected_humans, len(human_files_short)))
