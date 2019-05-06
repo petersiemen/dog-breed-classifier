@@ -53,3 +53,14 @@ print("Average width: {}".format(sum_width / total))
 # Premature end of JPEG file
 # Average height: 529.0449048018202
 # Average width: 567.0325709495869
+
+
+import torch.optim as optim
+import torch.nn as nn
+
+
+### TODO: select loss function
+criterion_scratch = nn.CrossEntropyLoss()
+
+### TODO: select optimizer
+optimizer_scratch = optim.SGD(model_scratch.parameters(), lr=0.01)
