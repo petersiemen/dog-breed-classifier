@@ -24,7 +24,7 @@
         "pip3 install --user pipenv",
         "pip install --upgrade pip",
 
-        "sudo yum install -y -q cmake3",
+        "sudo yum install -y -q cmake3 htop",
         "sudo ln -s /usr/bin/cmake3 /usr/local/bin/cmake",
         "cd /home/ec2-user/deep-learning-aws/dog-breed-classifier && /home/ec2-user/.local/bin/pipenv install",
 
@@ -36,7 +36,12 @@
         "cd /home/ec2-user/datasets && curl https://s3-us-west-1.amazonaws.com/udacity-aind/dog-project/dogImages.zip -o dogImages.zip",
         "cd /home/ec2-user/datasets && unzip dogImages.zip",
         "cd /home/ec2-user/datasets && curl http://vis-www.cs.umass.edu/lfw/lfw.tgz -o lfw.tgz",
-        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz"
+        "cd /home/ec2-user/datasets && tar -xvzf lfw.tgz",
+
+
+        "cd /home/ec2-user/deep-learning-aws/dog-breed-classifier && ln -s /home/ec2-user/datasets/lfw .",
+        "cd /home/ec2-user/deep-learning-aws/dog-breed-classifier && ln -s /home/ec2-user/datasets/dogImages .",
+        "where=$(find /home/ec2-user/.local/share/virtualenvs/ -name JpegImagePlugin.py) && sed -i  's/        self.info\\[\"photoshop\"\\] = photoshop/            self.info\\[\"photoshop\"\\] = photoshop/' $where"
       ]
     }
   ]
