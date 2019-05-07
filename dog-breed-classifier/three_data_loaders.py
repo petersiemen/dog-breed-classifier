@@ -21,12 +21,12 @@ normalize = transforms.Normalize(
 transform = transforms.Compose([
     transforms.Resize(size),
     transforms.CenterCrop(cropped_size),
-    transforms.ToTensor(),
-    normalize
+    transforms.ToTensor()
+    #,normalize
 ])
 
-data_dir = "./dogImages"
-#data_dir = "./dogImagesSample"
+#data_dir = "./dogImages"
+data_dir = "./dogImagesSample"
 # Pass transforms in here, then run the next cell to see how the transforms look
 train_data = datasets.ImageFolder(data_dir + '/train', transform=transform)
 test_data = datasets.ImageFolder(data_dir + '/test', transform=transform)

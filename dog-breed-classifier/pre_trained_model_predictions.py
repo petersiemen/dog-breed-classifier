@@ -4,6 +4,9 @@ import torchvision.models as models
 import torchvision.transforms.functional as TF
 import torch
 import torch.nn as nn
+import numpy as np
+
+use_cuda = False
 
 # Set PIL to be tolerant of image files that are truncated.
 from PIL import ImageFile
@@ -31,7 +34,6 @@ def VGG16_predict(img_path):
     ## TODO: Complete the function.
     ## Load and pre-process an image from the given img_path
     ## Return the *index* of the predicted class for that image
-
     image = Image.open(img_path)
     plt.imshow(image)
 
@@ -42,20 +44,15 @@ def VGG16_predict(img_path):
     ])
 
     tensor = transform(image)
+    if use_cuda:
+        tensor = tensor.cuda()
 
-    # conv = nn.Conv2d(3, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-    # conv.forward(tensor.reshape(1,3,255,255))
-    # print(conv)
+    output = VGG16(tensor.reshape(1, 3, 255, 255))
 
-    # plt.imshow(tensor.numpy().squeeze(), cmap='Greys_r');
+    _, preds_tensor = torch.max(output, 1)
+    preds = np.squeeze(preds_tensor.numpy()) if not use_cuda else np.squeeze(preds_tensor.cpu().numpy())
 
-    # plt.imshow(tensor.numpy().transpose((1, 2, 0)))
-    # plt.show()
-    print(VGG16)
-    out = VGG16(tensor.reshape(1, 3, 255, 255))
-    idx_of_max_value = out.detach().numpy().argmax()
-
-    return idx_of_max_value  # predicted class index
+    return preds
 
 
 prediction = VGG16_predict('dogImages/train/001.Affenpinscher/Affenpinscher_00001.jpg')
@@ -85,14 +82,14 @@ def dog_detector(img_path):
     return is_dog  # true/false
 
 
-# detected_dogs_in_humans = [dog_detector(human_file) for human_file in tqdm(human_files_short)].count(True)
-# detected_dogs_in_dogs = [dog_detector(dog_file) for dog_file in tqdm(dog_files_short)].count(True)
-#
-#
-# print('\nTest Accuracy Dog Classifier (Finding Humans): %2d%% (%2d/%2d)' % (
-#     100. * detected_dogs_in_humans / len(human_files_short),
-#     detected_dogs_in_humans, len(human_files_short)))
-#
-# print('\nTest Accuracy Dog Classifier (Finding Dogs): %2d%% (%2d/%2d)' % (
-#     100. * detected_dogs_in_dogs / len(dog_files_short),
-#     detected_dogs_in_dogs, len(dog_files_short)))
+detected_dogs_in_humans = [dog_detector(human_file) for human_file in tqdm(human_files_short)].count(True)
+detected_dogs_in_dogs = [dog_detector(dog_file) for dog_file in tqdm(dog_files_short)].count(True)
+
+
+print('\nTest Accuracy Dog Classifier (Finding Humans): %2d%% (%2d/%2d)' % (
+    100. * detected_dogs_in_humans / len(human_files_short),
+    detected_dogs_in_humans, len(human_files_short)))
+
+print('\nTest Accuracy Dog Classifier (Finding Dogs): %2d%% (%2d/%2d)' % (
+    100. * detected_dogs_in_dogs / len(dog_files_short),
+    detected_dogs_in_dogs, len(dog_files_short)))
