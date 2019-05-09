@@ -20,6 +20,7 @@ resource "aws_instance" "web" {
   security_groups = [
     "${data.terraform_remote_state.access.security_group__name__ssh_access_from_home}",
     "${data.terraform_remote_state.access.security_group__name__jupyter_access_from_home}",
+    "${data.terraform_remote_state.access.security_group__name__grafana_access_from_home}",
     "${data.terraform_remote_state.access.security_group__name__internet_out}",
   ]
 

@@ -41,7 +41,11 @@
 
         "cd /home/ec2-user/deep-learning-aws/dog-breed-classifier && ln -s /home/ec2-user/datasets/lfw .",
         "cd /home/ec2-user/deep-learning-aws/dog-breed-classifier && ln -s /home/ec2-user/datasets/dogImages .",
-        "where=$(find /home/ec2-user/.local/share/virtualenvs/ -name JpegImagePlugin.py) && sed -i  's/        self.info\\[\"photoshop\"\\] = photoshop/            self.info\\[\"photoshop\"\\] = photoshop/' $where"
+        "where=$(find /home/ec2-user/.local/share/virtualenvs/ -name JpegImagePlugin.py) && sed -i  's/        self.info\\[\"photoshop\"\\] = photoshop/            self.info\\[\"photoshop\"\\] = photoshop/' $where",
+
+        "sudo curl -L \"https://github.com/docker/compose/releases/download/1.24.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+        "sudo chmod +x /usr/local/bin/docker-compose"
+
       ]
     }
   ]

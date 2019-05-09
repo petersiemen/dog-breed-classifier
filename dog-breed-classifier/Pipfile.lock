@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "28f69c91d952416d48c4c992ffb3c04b1c78779598a0d2a2e6864cb95df6681d"
+            "sha256": "fa396c3dda2d596df61f899d2d09f141c8f5902d8f709d52c54c41780d11c73c"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -91,6 +91,10 @@
                 "sha256:b79bd200a88c87c9a9d446c990ae71c5a626d1f3730174e6d570157ff1d896cf"
             ],
             "version": "==0.3.0"
+        },
+        "gpumon": {
+            "git": "https://github.com/msalvaris/gpu_monitor.git",
+            "ref": "2b68049b0f74533fcaa0d8ff56ac590af738da83"
         },
         "ipykernel": {
             "hashes": [
@@ -459,10 +463,10 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:5ffada19f6203563680669ee7f53b64dabbeb100eb51b61996085e99c03b284a",
-                "sha256:e8218dd399a61674745138520d0d4cf2621d7e032439341bc3f647bff125818d"
+                "sha256:31cba6ffb739f099a85e243eff8cb717089fdd3c7300767d9fc34cb8e1b065f5",
+                "sha256:5ad302949b3c98dd73f8d9fcdc7e9cb592f120e32a18e23efd7f3dc51194472b"
             ],
-            "version": "==2.3.1"
+            "version": "==2.4.0"
         },
         "pyparsing": {
             "hashes": [
@@ -738,10 +742,10 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:5ffada19f6203563680669ee7f53b64dabbeb100eb51b61996085e99c03b284a",
-                "sha256:e8218dd399a61674745138520d0d4cf2621d7e032439341bc3f647bff125818d"
+                "sha256:31cba6ffb739f099a85e243eff8cb717089fdd3c7300767d9fc34cb8e1b065f5",
+                "sha256:5ad302949b3c98dd73f8d9fcdc7e9cb592f120e32a18e23efd7f3dc51194472b"
             ],
-            "version": "==2.3.1"
+            "version": "==2.4.0"
         },
         "six": {
             "hashes": [

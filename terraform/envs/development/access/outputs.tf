@@ -10,6 +10,10 @@ output "security_group__name__jupyter_access_from_home" {
   value = "${aws_security_group.jupyter-access-from-home.name}"
 }
 
+output "security_group__name__grafana_access_from_home" {
+  value = "${aws_security_group.grafana-access-from-home.name}"
+}
+
 output "security_group__name__internet_out" {
   value = "${aws_security_group.internet-out-all-ports.name}"
 }

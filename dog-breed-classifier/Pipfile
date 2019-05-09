@@ -19,6 +19,7 @@ pillow = "*"
 scipy = "*"
 tqdm = "*"
 face-recognition = "*"
+gpumon = {git = "https://github.com/msalvaris/gpu_monitor.git"}
 
 [requires]
 python_version = "3.6"
