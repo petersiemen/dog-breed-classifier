@@ -7,3 +7,4 @@ lfw
 .ipynb_checkpoints
 .venv
 __pycache__
+node_modules
