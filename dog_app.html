@@ -15119,7 +15119,14 @@ Test Accuracy: 79% (664/836)
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Answer:</strong> (Three possible points for improvement)</p>
+<p><strong>Answer:</strong> (Three possible points for improvement)
+Given the difficulty of the task of classifying dog breeds the achieved accuracy of 79% on the test data set is better than expected. Especially because I replaced and retrained only the last layer of the pretrained VGG-16 network.</p>
+<p>In order to improve the accuracy classifier one could</p>
+<ul>
+<li>retrain all classifying fully connected layers</li>
+<li>experiment with the network topology of the fully connected layers. Either these 3 fully connected layers are already pushing the network to overfit - then we should reduce the amount of nodes or the amount of layers - or these 3 layers are not yet enough to capture all distinctive combinations of features to classify dog breeds.</li>
+<li>experiment with other pre-trained convolutional networks like Inception or Alex-Net.</li>
+</ul>
 
 </div>
 </div>
